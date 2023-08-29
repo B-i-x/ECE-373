@@ -3,7 +3,6 @@ package edu.ece373.lab1;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import edu.ece373.lab1.Person;
 
 class PersonTest {
 
