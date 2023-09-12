@@ -1,0 +1,7 @@
+Date
+-----------
+- month: int
+- day: int
+- year: int
+-----------
++ Date(int month, int day, int year)

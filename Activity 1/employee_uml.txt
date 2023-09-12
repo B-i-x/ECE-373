@@ -1,0 +1,9 @@
+Employee
+--------
+-name: String
+-salary: double
+-hire_date: Date
+--------
+Employee(String name, int salary, Date hire_date)
+GiveRaise(double percent_of_salary)
+HasSameName(String name_to_compare)
