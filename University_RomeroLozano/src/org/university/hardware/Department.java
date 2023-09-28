@@ -43,4 +43,23 @@ public class Department {
     public ArrayList<Course> getCourses() {
         return courses;
     }
+
+    public ArrayList<Professor> getProfessorList() {
+        return this.professors;
+    }
+
+    public String getName() {
+        return null;
+    }
+
+    public void printSchedule() {
+    }
+
+    public ArrayList<Student> getStudentList() {
+        return this.students;
+    }
+
+    public ArrayList<Course> getCourseList() {
+        return this.courses;
+    }
 }

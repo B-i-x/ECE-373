@@ -32,30 +32,30 @@ public class Student {
     }
 
     public boolean detectConflict(Course aCourse) {
-        // for (Course course : schedule) {
-        //     if (course.hasScheduleConflict(aCourse)) {
-        //         return true; // Conflict detected
-        //     }
-        // }
+        for (Course course : schedule) {
+            if (course.getCourseNumber() == aCourse.getCourseNumber()) {
+                return true; // Conflict detected
+            }
+        }
         return false; // No conflict
     }
 
     public void addCourse(Course aCourse) {
-        // if (detectConflict(aCourse)) {
-        //     System.out.println("Schedule conflict detected. Cannot add course '" + aCourse.getName() + "'.");
-        // } else {
-        //     schedule.add(aCourse);
-        //     System.out.println("Course '" + aCourse.getName() + "' added to the schedule of " + name + ".");
-        // }
+        if (detectConflict(aCourse)) {
+            System.out.println("Schedule conflict detected. Cannot add course '" + aCourse.getName() + "'.");
+        } else {
+            schedule.add(aCourse);
+            // System.out.println("Course '" + aCourse.getName() + "' added to the schedule of " + name + ".");
+        }
     }
 
     public void dropCourse(Course aCourse) {
-        // boolean removed = schedule.remove(aCourse);
-        // if (removed) {
-        //     System.out.println("Course '" + aCourse.getName() + "' dropped from the schedule of " + name + ".");
-        // } else {
-        //     System.out.println("The course '" + aCourse.getName() + "' could not be dropped because '" + name + "' is not enrolled in '" + aCourse.getName() + "'.");
-        // }
+        boolean removed = schedule.remove(aCourse);
+        if (removed) {
+            // System.out.println("Course '" + aCourse.getName() + "' dropped from the schedule of " + name + ".");
+        } else {
+            System.out.println("The course " + aCourse.getName() + " could not be dropped because " + name + " is not enrolled in " + aCourse.getName() + ".");
+        }
     }
 
     public void setName(String name) {
@@ -66,8 +66,8 @@ public class Student {
         return name;
     }
 
-    public List<Course> getSchedule() {
-        return schedule;
+    public void printSchedule() {
+        return;
     }
 
     public void setDepartment(Department department) {

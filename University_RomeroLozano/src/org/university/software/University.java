@@ -2,12 +2,14 @@ package org.university.software;
 
 import org.university.people.Student;
 import org.university.hardware.Department;
+import org.university.hardware.Classroom;
+
 
 import java.util.ArrayList;
 
 public class University {
     public ArrayList<Department> departmentList = new ArrayList<>();
-    public ArrayList<Department> classroomList = new ArrayList<>();
+    public ArrayList<Classroom> classroomList = new ArrayList<>();
 
     public void printDepartmentList() {
         for (Department d : departmentList) {

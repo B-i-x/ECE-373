@@ -16,24 +16,32 @@ public class Professor {
     }
 
     public boolean detectConflict(Course aCourse) {
-        // for (Course course : schedule) {
-        //     if (course.hasScheduleConflict(aCourse)) {
-        //         return true; // Conflict detected
-        //     }
-        // }
+        for (Course course : schedule) {
+            if (course.getCourseNumber() == aCourse.getCourseNumber()) {
+                return true; // Conflict detected
+            }
+        }
+
+        if (aCourse.hasProfessor()) {
+            return true; // Conflict detected
+        }
+
         return false; // No conflict
     }
 
     public void addCourse(Course aCourse) {
-        // if (detectConflict(aCourse)) {
-        //     System.out.println("Schedule conflict detected. Cannot assign course '" + aCourse.getName() + "' to Professor " + name + ".");
-        // } else if (aCourse.getProfessor() != null) {
-        //     System.out.println("The professor cannot be assigned to this course because Professor " + aCourse.getProfessor().getName() + " is already assigned to the course '" + aCourse.getName() + "'.");
-        // } else {
-        //     schedule.add(aCourse);
-        //     aCourse.setProfessor(this); // Assign the professor to the course
-        //     System.out.println("Professor " + name + " assigned to teach course '" + aCourse.getName() + "'.");
-        // }
+        // System.out.println("is conflict detected? " + detectConflict(aCourse));
+        if (detectConflict(aCourse)) {
+            System.out.println("The professor cannot be assigned to this course because professor " + name + " is already assigned to the course " +  aCourse.getName() );
+            // System.out.println("Schedule conflict detected. Cannot add course '" + aCourse.getName() + "'.");
+            return;
+        } 
+        else {
+            schedule.add(aCourse);
+            aCourse.setProfessor(this);
+            // System.out.println("Course '" + aCourse.getName() + "' added to the schedule of " + name + ".");
+            return;
+        }
     }
 
     public String getName() {
@@ -44,11 +52,12 @@ public class Professor {
         this.name = name;
     }
 
-    public List<Course> getSchedule() {
-        return schedule;
+    public void printSchedule() {
+        return;
     }
 
     public Department getDepartment() {
         return department;
     }
+
 }
