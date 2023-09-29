@@ -1,0 +1,55 @@
+Testing collisionDetection method in Student and professor class ...
+ECE107 course cannot be added to Tharp's Schedule. ECE107 conflicts with ECE320. Conflicting time slot is Mon 9:30am to 10:45am.
+Is there a conflict between Circuits Analysis and Experimental Course ? : true
+
+Lahiru's credit remaining for graduation ...
+Student Lahiru needs 68 units to graduate
+
+The roster for course CS387:
+Lahiru 
+Ben 
+Jerry 
+
+The roster for course CS372:
+Lahiru 
+Daz 
+Ben 
+Jerry 
+
+The list of students in the university:
+Lahiru
+Daz
+Ben
+Jerry
+
+The list of professors in the university:
+Regan
+RosenBlit
+Tharp
+Kececioglu
+Homer
+
+The list of courses in the university:
+ECE275
+ECE320
+ECE373
+ECE107
+CS387
+CS372
+CS345
+CS426
+
+The student list for department CS:
+Ben
+Jerry
+
+The professor list for department ECE:
+Regan
+RosenBlit
+Tharp
+
+The course list for department ECE:
+ECE275
+ECE320
+ECE373
+ECE107

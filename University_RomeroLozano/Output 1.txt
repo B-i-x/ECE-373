@@ -1,0 +1,80 @@
+Testing Professor Conflicts  ...
+The professor cannot be assigned to this course because professor Kececioglu is already assigned to the course Enterprise Web Applications.
+The professor cannot be assigned to this course because professor Homer is already assigned to the course Discrete Structures.
+
+Testing dropCourse method in Student class ...
+The course ECE373 could not be dropped because Lahiru is not enrolled in ECE373.
+
+Conflicts:
+ECE107 conflicts with ECE320. Conflicting time slot Mon 9:30am to 10:45am. ECE107 course cannot be added to Harvill 101's Schedule.
+ECE107 course cannot be added to Tharp's Schedule. ECE107 conflicts with ECE320. Conflicting time slot is Mon 9:30am to 10:45am.
+ECE275 course cannot be added to Homer's Schedule. ECE275 conflicts with CS345. Conflicting time slot is Wed 11:00am to 12:15pm.
+ECE275 course cannot be added to Homer's Schedule. ECE275 conflicts with CS345. Conflicting time slot is Fri 11:00am to 12:15pm.
+ECE320 course cannot be added to Lahiru's Schedule. ECE320 conflicts with CS426. Conflicting time slot is Mon 9:30am to 10:45am.
+ECE320 course cannot be added to Lahiru's Schedule. ECE320 conflicts with CS426. Conflicting time slot is Wed 9:30am to 10:45am.
+ECE373 course cannot be added to Lahiru's Schedule. ECE373 conflicts with CS387. Conflicting time slot is Tue 8:00am to 9:15am.
+ECE373 course cannot be added to Lahiru's Schedule. ECE373 conflicts with CS387. Conflicting time slot is Thu 8:00am to 9:15am.
+ECE275 course cannot be added to Daz's Schedule. ECE275 conflicts with CS345. Conflicting time slot is Wed 11:00am to 12:15pm.
+ECE275 course cannot be added to Daz's Schedule. ECE275 conflicts with CS345. Conflicting time slot is Fri 11:00am to 12:15pm.
+
+The schedule for Prof. Tharp:
+Mon 9:30am to 10:45am ECE320 Circuits Analysis
+Wed 9:30am to 10:45am ECE320 Circuits Analysis
+
+The schedule for Prof. Kececioglu:
+Tue 8:00am to 9:15am CS387 Enterprise Web Applications
+Tue 9:30am to 10:45am CS372 Comparative Programming Languages
+Thu 8:00am to 9:15am CS387 Enterprise Web Applications
+Thu 9:30am to 10:45am CS372 Comparative Programming Languages
+
+The schedule for Prof. Homer:
+Mon 9:30am to 10:45am CS426 Computer Networks
+Wed 9:30am to 10:45am CS426 Computer Networks
+Wed 11:00am to 12:15pm CS345 Discrete Structures
+Fri 11:00am to 12:15pm CS345 Discrete Structures
+
+The schedule for Harvill 101:
+Mon 9:30am to 10:45am ECE320 Circuits Analysis
+Wed 9:30am to 10:45am ECE320 Circuits Analysis
+
+The schedule for Harvill 203:
+Tue 8:00am to 9:15am CS387 Enterprise Web Applications
+Thu 8:00am to 9:15am CS387 Enterprise Web Applications
+
+The schedule for Gould Simpson 102:
+Mon 9:30am to 10:45am CS426 Computer Networks
+Wed 9:30am to 10:45am CS426 Computer Networks
+Wed 11:00am to 12:15pm CS345 Discrete Structures
+Fri 11:00am to 12:15pm CS345 Discrete Structures
+
+The schedule for Gould Simpson 105:
+Tue 9:30am to 10:45am CS372 Comparative Programming Languages
+Thu 9:30am to 10:45am CS372 Comparative Programming Languages
+
+The schedule for Student Lahiru:
+Mon 9:30am to 10:45am CS426 Computer Networks
+Tue 8:00am to 9:15am CS387 Enterprise Web Applications
+Wed 9:30am to 10:45am CS426 Computer Networks
+Thu 8:00am to 9:15am CS387 Enterprise Web Applications
+
+The schedule for Student Ben:
+Mon 9:30am to 10:45am CS426 Computer Networks
+Tue 8:00am to 9:15am CS387 Enterprise Web Applications
+Tue 9:30am to 10:45am CS372 Comparative Programming Languages
+Wed 9:30am to 10:45am CS426 Computer Networks
+Wed 11:00am to 12:15pm CS345 Discrete Structures
+Thu 8:00am to 9:15am CS387 Enterprise Web Applications
+Thu 9:30am to 10:45am CS372 Comparative Programming Languages
+Fri 11:00am to 12:15pm CS345 Discrete Structures
+
+The schedule for Student Jerry:
+Mon 9:30am to 10:45am ECE320 Circuits Analysis
+Tue 8:00am to 9:15am CS387 Enterprise Web Applications
+Tue 9:30am to 10:45am CS372 Comparative Programming Languages
+Wed 9:30am to 10:45am ECE320 Circuits Analysis
+Thu 8:00am to 9:15am CS387 Enterprise Web Applications
+Thu 9:30am to 10:45am CS372 Comparative Programming Languages
+
+The schedule for course Enterprise Web Applications:
+Tue 8:00am to 9:15am Harvill 203
+Thu 8:00am to 9:15am Harvill 203
