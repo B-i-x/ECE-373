@@ -37,11 +37,11 @@ public class Department {
     }
 
     public ArrayList<Student> getStudents() {
-        return students;
+        return this.students;
     }
 
     public ArrayList<Course> getCourses() {
-        return courses;
+        return this.courses;
     }
 
     public ArrayList<Professor> getProfessorList() {
@@ -52,6 +52,7 @@ public class Department {
     }
 
     public ArrayList<Student> getStudentList() {
+        // System.out.println("called");
         return this.students;
     }
 
@@ -60,11 +61,20 @@ public class Department {
     }
 
     public void printStudentList() {
+        for (Student st : students) {
+			System.out.println(st.getName() + " ");
+		}
     }
 
     public void printProfessorList() {
+        for (Professor p : professors) {
+			System.out.println(p.getName() + " ");
+		}
     }
 
     public void printCourseList() {
+        for (Course c : courses) {
+			System.out.println(c.getNumWDepartment() + " ");
+		}
     }
 }

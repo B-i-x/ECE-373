@@ -15,7 +15,6 @@ public class Driver2
 
 		boolean flag = false;
 		int reqCredits = 0;
-		double earns = 0;
 
 		/* Initialize University */
 
