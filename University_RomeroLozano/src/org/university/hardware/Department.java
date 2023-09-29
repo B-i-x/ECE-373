@@ -48,10 +48,6 @@ public class Department {
         return this.professors;
     }
 
-    public String getName() {
-        return null;
-    }
-
     public void printSchedule() {
     }
 
@@ -61,5 +57,14 @@ public class Department {
 
     public ArrayList<Course> getCourseList() {
         return this.courses;
+    }
+
+    public void printStudentList() {
+    }
+
+    public void printProfessorList() {
+    }
+
+    public void printCourseList() {
     }
 }
