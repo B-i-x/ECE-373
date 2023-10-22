@@ -9,6 +9,7 @@ public class OnlineCourse extends Course{
         if (aStudent.getcurrentlyEnrolledCredits() >= 6) {
             return true;
         }
+        System.out.println("Student " + aStudent.getName() + "has only " + aStudent.getcurrentlyEnrolledCredits() + " on campus credits enrolled. Should have at least 6 credits registered before registering online courses.");
         return false;
     }
 

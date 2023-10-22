@@ -32,9 +32,12 @@ public class Student extends Person {
 
     @Override
     public void addCourse(CampusCourse cCourse) {
-        if (detectConflict(cCourse) || !cCourse.availableTo(this)) {
+        if (!cCourse.availableTo(this)) {
             
             System.out.println(getName() + " can't add Campus Course " + cCourse.getNumWDepartment() + " " + cCourse.getName() + ". Because this Campus course has enough student.");
+            return;
+        }
+        if(detectConflict(cCourse)) {
             return;
         }
         getCampusCourses().add(cCourse);
@@ -47,6 +50,9 @@ public class Student extends Person {
     @Override
     public void addCourse(OnlineCourse oCourse) {
         if (!oCourse.availableTo(this)) {
+
+            System.out.println(getName() + " can't add online Course " + oCourse.getNumWDepartment() + " " + oCourse.getName() + ". Because this student doesn't have enough Campus course credit.");
+
             return;
         }
         
@@ -83,7 +89,13 @@ public class Student extends Person {
     }
 
     public void dropCourse(OnlineCourse oCourse) {
-        // ... (implement the logic for dropping an OnlineCourse as per the requirements)
+        if (!getOnlineCourses().contains(oCourse)) {
+            System.out.println("The course " + oCourse.getNumWDepartment() + " could not be dropped because " + getName() + " is not enrolled in " + oCourse.getNumWDepartment() + ".");
+            return;
+        }
+        getOnlineCourses().remove(oCourse);
+        currentlyEnrolledCredits -= oCourse.getCreditUnits();
+        oCourse.removeStudent(this);
     }
 
     //getters and setters

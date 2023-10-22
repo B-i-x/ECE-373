@@ -10,7 +10,6 @@ import java.util.List;
 public class Professor extends Employee {
     private double salary;
     private Department department;
-    private List<CampusCourse> teachingCourses = new ArrayList<>();
 
     public Professor() {
         super();
@@ -30,7 +29,6 @@ public class Professor extends Employee {
 
     public void addCourse(CampusCourse cCourse) {
         if (detectConflict(cCourse)) {
-            System.out.println("Schedule conflict detected. Cannot assign course to professor.");
             return;
         }
         if (cCourse.getProfessor() != null) {
@@ -39,7 +37,7 @@ public class Professor extends Employee {
                                cCourse.getName() + ".");
             return;
         }
-        teachingCourses.add(cCourse);
+        getCampusCourses().add(cCourse);
         cCourse.setProfessor(this);
     }
 
