@@ -31,9 +31,14 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    public void addCourse(Course course) {
-        courses.add(course);
-        course.setDepartment(this);
+    public void addCourse(CampusCourse cCourse) {
+        campusCourses.add(cCourse);
+        cCourse.setDepartment(this);
+    }
+
+    public void addCourse(OnlineCourse oCourse) {
+        onlineCourses.add(oCourse);
+        oCourse.setDepartment(this);
     }
 
     public void addStaff(Staff s) {
@@ -98,8 +103,13 @@ public class Department {
     }
 
     public void printCourseList() {
-        for (Course c : courses) {
-			System.out.println(c.getNumWDepartment() + " ");
+        for (Course c : campusCourses) {
+			System.out.println(c.getNumWDepartment() + " " + c.getName());
 		}
+
+        for (Course c : onlineCourses) {
+			System.out.println(c.getNumWDepartment() + " " + c.getName());
+		}
+    
     }
 }

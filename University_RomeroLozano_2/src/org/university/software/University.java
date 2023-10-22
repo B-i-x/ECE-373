@@ -27,9 +27,7 @@ public class University {
 
     public void printCourseList() {
         for (Department d : departmentList) {
-            for (Course c : d.getCourses()) {
-                System.out.println(c.getName());
-            }
+            d.printCourseList();
         }
     }
 

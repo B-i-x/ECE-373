@@ -5,7 +5,10 @@ import org.university.software.Course;
 import org.university.software.OnlineCourse;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Person {
     private String name;
@@ -40,12 +43,24 @@ public abstract class Person {
     }
 
     public void printSchedule() {
-        System.out.println(name + "'s Schedule:");
-        for (CampusCourse course : campusCourses) {
-            System.out.println(course.getName() + " - " + course.getSchedule());
+        Map<Integer, Course> temp_times = new HashMap<>();
+
+        for (Course c : campusCourses) {
+            for (Integer time: c.getSchedule()) {
+                temp_times.put(time, c);
+            }
         }
+
+        ArrayList<Integer> sortedKeys = new ArrayList<Integer>(temp_times.keySet());
+ 
+        Collections.sort(sortedKeys);
+
+        for (Integer x : sortedKeys) {
+            System.out.println(Course.printIndividualSchedule(x) + temp_times.get(x).getNumWDepartment() + " " + temp_times.get(x).getName());
+        }
+
         for (OnlineCourse course : onlineCourses) {
-            System.out.println(course.getName());
+            System.out.println(course.getNumWDepartment() + " " + course.getName());
         }
     }
 

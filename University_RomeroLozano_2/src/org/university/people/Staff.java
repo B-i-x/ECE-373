@@ -2,6 +2,7 @@ package org.university.people;
 
 import org.university.hardware.Department;
 import org.university.software.CampusCourse;
+import org.university.software.Course;
 import org.university.software.OnlineCourse;
 
 public class Staff extends Employee {
@@ -9,7 +10,6 @@ public class Staff extends Employee {
     private double payRate;
     private int hoursWorked;
     private double tuitionFee;
-    private CampusCourse enrolledCourse; // Assuming a staff can enroll in only one campus course at a time
 
     public Staff() {
         super();
@@ -17,7 +17,6 @@ public class Staff extends Employee {
         this.payRate = 0.0;
         this.hoursWorked = 0;
         this.tuitionFee = 0.0;
-        this.enrolledCourse = null;
     }
 
     @Override
@@ -30,25 +29,92 @@ public class Staff extends Employee {
         this.payRate += this.payRate * (percent / 100);
     }
 
-    public double getTuitionFee() {
-        double onCampusFee = (enrolledCourse != null) ? enrolledCourse.getCreditUnits() * 300 : 0;
-        double onlineFee = getOnlineCourses().stream().mapToInt(course -> course.getCreditUnits() == 3 ? 2000 : 3000).sum();
-        return onCampusFee + onlineFee;
+    public Integer getTuitionFee() {
+        int oc_size = onlineCourses.size();
+        int cc_size = campusCourses.size();
+
+        double onCampusFee = 0;
+        double onlineFee = 0;
+        if (oc_size != 0) {
+            for (int i = 0; i < campusCourses.size(); i++) {
+                if (campusCourses.get(i) != null) {
+                    onCampusFee += campusCourses.get(i).getCreditUnits() * 300;
+                }
+            }
+
+        }
+        if (cc_size != 0) {
+            for (Course course : onlineCourses) {
+                int fee = (course.getCreditUnits() == 3) ? 2000 : 3000;
+                onlineFee += fee;
+            }
+            
+        }
+      
+        return (int) (onCampusFee + onlineFee);
     }
 
     public void addCourse(CampusCourse cCourse) {
-        if (enrolledCourse != null) {
-            System.out.println("Warning: Overwriting previously enrolled course " + enrolledCourse.getName());
+        int oc_size = onlineCourses.size();
+        int cc_size = campusCourses.size();
+
+        if (oc_size != 0 ) {
+            OnlineCourse enrolledCourse = onlineCourses.get(0);
+            System.out.println(enrolledCourse.getNumWDepartment() + " is removed from " + getName() + "'s schedule(Staff can only take one class at a time)."
+            + cCourse.getNumWDepartment() + " has been added from " + getName() + "'s Schedule.");
+           
+
         }
-        enrolledCourse = cCourse;
+        if (cc_size != 0) {
+            CampusCourse enrolledCourse = campusCourses.get(0);
+            System.out.println(enrolledCourse.getNumWDepartment() + " is removed from " + getName() + "'s schedule(Staff can only take one class at a time)."
+            + cCourse.getNumWDepartment() + " has been added from " + getName() + "'s Schedule.");
+            
+
+        }
+
+        if (campusCourses.size() == 0) {
+            campusCourses.add(cCourse);
+        }
+        else {
+            campusCourses.set(0, cCourse);
+
+        }
+
+        if (onlineCourses.size() != 0) {
+            onlineCourses.remove(0);
+        }
     }
 
     public void addCourse(OnlineCourse oCourse) {
-        if (enrolledCourse != null) {
-            System.out.println("Warning: Overwriting previously enrolled course " + enrolledCourse.getName());
+        int oc_size = onlineCourses.size();
+        int cc_size = campusCourses.size();
+        
+        if (oc_size != 0 ) {
+            OnlineCourse enrolledCourse = onlineCourses.get(0);
+            System.out.println(enrolledCourse.getNumWDepartment() + " is removed from " + getName() + "'s schedule(Staff can only take one class at a time)."
+            + oCourse.getNumWDepartment() + " has been added from " + getName() + "'s Schedule.");
+            
+        }
+        if (cc_size != 0) {
+            CampusCourse enrolledCourse = campusCourses.get(0);
+            System.out.println(enrolledCourse.getNumWDepartment() + " is removed from " + getName() + "'s schedule(Staff can only take one class at a time)."
+            + oCourse.getNumWDepartment() + " has been added from " + getName() + "'s Schedule.");
+           
+        }
+
+        if (onlineCourses.size() == 0) {
+            onlineCourses.add(oCourse);
+        }
+        else {
+            onlineCourses.set(0, oCourse);
+        }
+
+        if (campusCourses.size() != 0) {
+            campusCourses.remove(0);
         }
     }
 
-    // Getters and Setters for department, payRate, hoursWorked, tuitionFee, and enrolledCourse
-    // ... (omitted for brevity)
+ 
+    
 }

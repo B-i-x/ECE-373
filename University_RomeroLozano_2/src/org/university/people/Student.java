@@ -63,10 +63,10 @@ public class Student extends Person {
     }
 
 
-    public double getTuitionFee() {
+    public Integer getTuitionFee() {
         double onCampusFee = getCampusCourses().stream().mapToInt(Course::getCreditUnits).sum() * 300;
         double onlineFee = getOnlineCourses().stream().mapToInt(course -> course.getCreditUnits() == 3 ? 2000 : 3000).sum();
-        return onCampusFee + onlineFee;
+        return  (int) (onCampusFee + onlineFee);
     }
 
     public void dropCourse(CampusCourse cCourse) {

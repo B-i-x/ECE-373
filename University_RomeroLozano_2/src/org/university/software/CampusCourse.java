@@ -39,10 +39,6 @@ public class CampusCourse extends Course {
 
     }
 
-    public void printSchedule() {
-        System.out.println(getName() + " meets at " + schedule);
-    }
-
     @Override
     public boolean availableTo(Student aStudent) {
 
