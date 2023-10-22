@@ -43,6 +43,9 @@ public abstract class Course {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+    public Professor getProfessor() {
+        return professor;
+    }
 
     public Boolean hasProfessor() {
         //if it has a professor, return true

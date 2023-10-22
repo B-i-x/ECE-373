@@ -88,6 +88,11 @@ public class Student extends Person {
         // ... (implement the logic for dropping an OnlineCourse as per the requirements)
     }
 
-    // Getters and Setters for all the fields
-    // ... (omitted for brevity)
+    //getters and setters
+    public void setDepartment(Department d) {
+        this.department = d;
+    }
+    public Department getDepartment() {
+        return department;
+    }
 }

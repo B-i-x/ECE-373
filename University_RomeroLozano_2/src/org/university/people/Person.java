@@ -8,8 +8,8 @@ import java.util.List;
 
 public abstract class Person {
     private String name;
-    private List<CampusCourse> campusCourses;
-    private List<OnlineCourse> onlineCourses;
+    protected List<CampusCourse> campusCourses;
+    protected List<OnlineCourse> onlineCourses;
 
     public Person() {
         this.name = "";
