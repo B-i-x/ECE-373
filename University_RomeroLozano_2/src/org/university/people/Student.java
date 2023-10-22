@@ -1,19 +1,16 @@
 package org.university.people;
 
+import java.util.Arrays;
+
 import org.university.hardware.Department;
 import org.university.software.CampusCourse;
 import org.university.software.OnlineCourse;
 import org.university.software.Course;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Student extends Person {
     private Department department;
-    
-    private List<Course> schedule;
-    private List<CampusCourse> cc_schedule;
-    private List<OnlineCourse> oc_schedule;
+
 
     private int unitsCompleted;
     private int totalUnitsNeeded;
@@ -32,37 +29,19 @@ public class Student extends Person {
         return totalUnitsNeeded - unitsCompleted;
     }
 
-    public boolean detectConflict(Course aCourse) {
-        Boolean conflict_flag = false;
-        for (Course c : schedule) {
-            for (Integer course_time: c.getSchedule()) {
-                for (Integer new_course_time: aCourse.getSchedule()) {
-                    // System.out.println(course_time + " " + new_course_time);
-                    if (course_time.equals(new_course_time)) {
-                        // System.out.println("match found with " + aCourse.getNumWDepartment());
-                        System.out.println( aCourse.getNumWDepartment() + " course cannot be added to " + getName() + "'s schedule. " + aCourse.getNumWDepartment() + " conflicts with " + c.getNumWDepartment() + ". Conflicting time slot is " + Course.printIndividualSchedule(course_time) + ".");
-
-                        if (conflict_flag != true) {
-                            conflict_flag = true;
-                        }
-                    }
-
-                }
-
-            }
-           
-        }
-
-        return conflict_flag;
-    }
 
     @Override
     public void addCourse(CampusCourse cCourse) {
         if (detectConflict(cCourse) || !cCourse.availableTo(this)) {
+            
+            System.out.println(getName() + " can't add Campus Course " + cCourse.getNumWDepartment() + " " + cCourse.getName() + ". Because this Campus course has enough student.");
             return;
         }
         getCampusCourses().add(cCourse);
         currentlyEnrolledCredits += cCourse.getCreditUnits();
+        cCourse.addStudentToRoster(this);
+
+
     }
 
     @Override
@@ -72,7 +51,10 @@ public class Student extends Person {
         }
         getOnlineCourses().add(oCourse);
         currentlyEnrolledCredits += oCourse.getCreditUnits();
+        oCourse.addStudentToRoster(this);
+
     }
+
 
     public double getTuitionFee() {
         double onCampusFee = getCampusCourses().stream().mapToInt(Course::getCreditUnits).sum() * 300;
@@ -94,5 +76,9 @@ public class Student extends Person {
     }
     public Department getDepartment() {
         return department;
+    }
+
+    public int getcurrentlyEnrolledCredits() {
+        return currentlyEnrolledCredits;
     }
 }

@@ -6,7 +6,10 @@ public class OnlineCourse extends Course{
     
     @Override
     public boolean availableTo(Student aStudent) {
-        return getStudentRoster().size() < 1;
+        if (aStudent.getcurrentlyEnrolledCredits() >= 6) {
+            return true;
+        }
+        return false;
     }
 
 }

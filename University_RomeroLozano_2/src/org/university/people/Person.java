@@ -1,6 +1,7 @@
 package org.university.people;
 
 import org.university.software.CampusCourse;
+import org.university.software.Course;
 import org.university.software.OnlineCourse;
 
 import java.util.ArrayList;
@@ -8,22 +9,34 @@ import java.util.List;
 
 public abstract class Person {
     private String name;
-    protected List<CampusCourse> campusCourses;
-    protected List<OnlineCourse> onlineCourses;
+    protected List<CampusCourse> campusCourses = new ArrayList<>() ;
+    protected List<OnlineCourse> onlineCourses = new ArrayList<>() ;
 
     public Person() {
-        this.name = "";
-        this.campusCourses = new ArrayList<>();
-        this.onlineCourses = new ArrayList<>();
     }
 
     public boolean detectConflict(CampusCourse aCourse) {
-        for (CampusCourse course : campusCourses) {
-            if (course.getSchedule().stream().anyMatch(time -> aCourse.getSchedule().contains(time))) {
-                return true;
+        Boolean conflict_flag = false;
+        for (CampusCourse c : campusCourses) {
+            for (Integer course_time: c.getSchedule()) {
+                for (Integer new_course_time: aCourse.getSchedule()) {
+                    // System.out.println(course_time + " " + new_course_time);
+                    if (course_time.equals(new_course_time)) {
+                        // System.out.println("match found with " + aCourse.getNumWDepartment());
+                        System.out.println( aCourse.getNumWDepartment() + " course cannot be added to " + getName() + "'s schedule. " + aCourse.getNumWDepartment() + " conflicts with " + c.getNumWDepartment() + ". Conflicting time slot is " + Course.printIndividualSchedule(course_time) + ".");
+
+                        if (conflict_flag != true) {
+                            conflict_flag = true;
+                        }
+                    }
+
+                }
+
             }
+           
         }
-        return false;
+
+        return conflict_flag;
     }
 
     public void printSchedule() {
