@@ -49,5 +49,7 @@ public class CampusCourse extends Course {
     }
 
     // Getters and Setters for maxStudents, schedule, and classroom
-    // ... (omitted for brevity)
+    public void setMaxCourseLimit(int max) {
+        this.maxStudents = max;
+    }
 }

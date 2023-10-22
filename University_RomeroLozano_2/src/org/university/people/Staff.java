@@ -30,7 +30,7 @@ public class Staff extends Employee {
         this.payRate += this.payRate * (percent / 100);
     }
 
-    public double calculateTuition() {
+    public double getTuitionFee() {
         double onCampusFee = (enrolledCourse != null) ? enrolledCourse.getCreditUnits() * 300 : 0;
         double onlineFee = getOnlineCourses().stream().mapToInt(course -> course.getCreditUnits() == 3 ? 2000 : 3000).sum();
         return onCampusFee + onlineFee;

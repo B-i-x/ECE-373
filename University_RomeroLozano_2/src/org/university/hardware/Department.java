@@ -2,8 +2,13 @@ package org.university.hardware;
 
 import org.university.hardware.Department;
 import org.university.software.Course;
+import org.university.software.CampusCourse;
+import org.university.software.OnlineCourse;
+
+
 import org.university.people.Student;
 import org.university.people.Professor;
+import org.university.people.Staff;
 
 import java.util.ArrayList;
 
@@ -11,8 +16,12 @@ import java.util.ArrayList;
 public class Department {
     private String departmentName;
     private ArrayList<Course> courses = new ArrayList<>();
+    private ArrayList<CampusCourse> campusCourses = new ArrayList<>();
+    private ArrayList<OnlineCourse> onlineCourses = new ArrayList<>();
+
     private ArrayList<Student> students = new ArrayList<>();
     private ArrayList<Professor> professors = new ArrayList<>();
+    private ArrayList<Staff> staff = new ArrayList<>();
 
     public String getDepartmentName() {
         return departmentName;
@@ -25,6 +34,10 @@ public class Department {
     public void addCourse(Course course) {
         courses.add(course);
         course.setDepartment(this);
+    }
+
+    public void addStaff(Staff s) {
+        staff.add(s);
     }
 
     public void addProfessor(Professor professor) {
@@ -51,6 +64,10 @@ public class Department {
     public void printSchedule() {
     }
 
+    public ArrayList<Staff> getStaffList() {
+        return this.staff;
+    }
+
     public ArrayList<Student> getStudentList() {
         // System.out.println("called");
         return this.students;
@@ -58,6 +75,14 @@ public class Department {
 
     public ArrayList<Course> getCourseList() {
         return this.courses;
+    }
+
+    public ArrayList<CampusCourse> getCampusCourseList() {
+        return this.campusCourses;
+    }
+
+    public ArrayList<OnlineCourse> getOnlineCourseList() {
+        return this.onlineCourses;
     }
 
     public void printStudentList() {

@@ -74,7 +74,7 @@ public class Student extends Person {
         currentlyEnrolledCredits += oCourse.getCreditUnits();
     }
 
-    public double calculateTuition() {
+    public double getTuitionFee() {
         double onCampusFee = getCampusCourses().stream().mapToInt(Course::getCreditUnits).sum() * 300;
         double onlineFee = getOnlineCourses().stream().mapToInt(course -> course.getCreditUnits() == 3 ? 2000 : 3000).sum();
         return onCampusFee + onlineFee;
