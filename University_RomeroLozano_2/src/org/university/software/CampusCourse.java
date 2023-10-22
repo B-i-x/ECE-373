@@ -11,9 +11,7 @@ public class CampusCourse extends Course {
     private Classroom classroom;
 
     public CampusCourse() {
-        super();
-        this.maxStudents = 0;
-        this.classroom = null;
+        
     }
 
     public Classroom getRoomAssigned() {

@@ -62,11 +62,9 @@ public abstract class Course {
     public void setDepartment(Department department) {
         this.department = department;
     }
-
     public Department getDepartment() {
         return department;
     }
-
     public String getNumWDepartment() {
         return department.getDepartmentName() + courseNumber;
     }
@@ -78,6 +76,13 @@ public abstract class Course {
 
     public int getCourseNumber() {
         return courseNumber;
+    }
+
+    public void setCreditUnits(int inputCreditUnits) {
+        this.creditUnits = inputCreditUnits;
+    }
+    public int getCreditUnits() {
+        return creditUnits;
     }
     /////////////////////SCHEDULING/////////////////////
 
@@ -108,7 +113,7 @@ public abstract class Course {
         }
         return;
     }
-    /////////////////////SCHEDULING/////////////////////
+    /////////////////////ROSTER/////////////////////
 
     public void addStudentToRoster(Student student) {
         if (!studentRoster.contains(student)) {
