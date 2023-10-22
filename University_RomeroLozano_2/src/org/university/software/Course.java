@@ -11,7 +11,7 @@ public abstract class Course {
     private Department department;
     private int courseNumber;
     protected ArrayList<Integer> schedule = new ArrayList<>();
-    private ArrayList<Student> studentRoster;
+    private ArrayList<Student> studentRoster  = new ArrayList<>();
     private Professor professor;
     private int creditUnits;
 
