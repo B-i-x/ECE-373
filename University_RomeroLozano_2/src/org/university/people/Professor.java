@@ -4,12 +4,13 @@ import org.university.hardware.Department;
 import org.university.software.CampusCourse;
 import org.university.software.OnlineCourse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends Employee {
     private double salary;
     private Department department;
-    private List<CampusCourse> teachingCourses;
+    private List<CampusCourse> teachingCourses = new ArrayList<>();
 
     public Professor() {
         super();
