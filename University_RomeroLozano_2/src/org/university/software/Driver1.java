@@ -316,6 +316,7 @@ public class Driver1
 		System.out.println("\nTest conflicts of professor schedule:");
 		p3.addCourse(c8);
 		p5.addCourse(c5);
+        p5.addCourse(oc1);
 
 		/* Try to add ECE320 to student Lahiru */
 		System.out.println("\ntest Conflicts when add course to student:");

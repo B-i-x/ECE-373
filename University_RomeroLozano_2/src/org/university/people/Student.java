@@ -49,6 +49,7 @@ public class Student extends Person {
         if (!oCourse.availableTo(this)) {
             return;
         }
+        
         getOnlineCourses().add(oCourse);
         currentlyEnrolledCredits += oCourse.getCreditUnits();
         oCourse.addStudentToRoster(this);
@@ -64,6 +65,21 @@ public class Student extends Person {
 
     public void dropCourse(CampusCourse cCourse) {
         // ... (implement the logic for dropping a CampusCourse as per the requirements)
+        if (!getCampusCourses().contains(cCourse)) {
+            System.out.println("The course " + cCourse.getNumWDepartment() + " could not be dropped because " + getName() + " is not enrolled in " + cCourse.getNumWDepartment()  + ".");
+            return;
+        }
+    
+        int totalCampusCreditsAfterDrop = getCampusCourses().stream().mapToInt(Course::getCreditUnits).sum() - cCourse.getCreditUnits();
+    
+        if (getOnlineCourses().size() > 0 && totalCampusCreditsAfterDrop < 6) {
+            System.out.println(getName() + " can't drop this CampusCourse, because student doesn't have enough campus course credit to hold online courses.");
+            return;
+        }
+    
+        getCampusCourses().remove(cCourse);
+        currentlyEnrolledCredits -= cCourse.getCreditUnits();
+        cCourse.removeStudent(this);
     }
 
     public void dropCourse(OnlineCourse oCourse) {

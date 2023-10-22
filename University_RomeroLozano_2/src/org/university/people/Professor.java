@@ -34,8 +34,8 @@ public class Professor extends Employee {
             return;
         }
         if (cCourse.getProfessor() != null) {
-            System.out.println("The professor cannot be assigned to this course, because professor " + 
-                               cCourse.getProfessor().getName() + " is already assigned to the course " + 
+            System.out.println("The professor " + getName() + "cannot be assigned to this campus course, because professor " + 
+                               cCourse.getProfessor().getName()  + " is already assigned to the course " + 
                                cCourse.getName() + ".");
             return;
         }
@@ -44,6 +44,12 @@ public class Professor extends Employee {
     }
 
     public void addCourse(OnlineCourse oCourse) {
+        if (oCourse.getProfessor() != null) {
+            System.out.println("The professor cannot be assigned to this online course, because professor " + 
+                               oCourse.getProfessor().getName() + " is already assigned to the online course " + 
+                               oCourse.getName() + ".");
+            return;
+        }
         // Assuming professors can teach online courses without any restrictions
         onlineCourses.add(oCourse);
         oCourse.setProfessor(this);
