@@ -118,5 +118,13 @@ public class Staff extends Employee {
     public void setMonthlyHours(int hours) {
         this.hoursWorked = hours;
     }
+
+    public void setDepartment(Department d) {
+        this.department = d;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
     
 }

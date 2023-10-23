@@ -1,7 +1,5 @@
 package org.university.people;
 
-import java.util.Arrays;
-
 import org.university.hardware.Department;
 import org.university.software.CampusCourse;
 import org.university.software.OnlineCourse;
@@ -15,14 +13,10 @@ public class Student extends Person {
     private int unitsCompleted;
     private int totalUnitsNeeded;
     private int currentlyEnrolledCredits;
-    private double tuitionFee;
+    private int tuitionFee;
 
     public Student() {
-        super();
-        this.unitsCompleted = 0;
-        this.totalUnitsNeeded = 0;
-        this.currentlyEnrolledCredits = 0;
-        this.tuitionFee = 0.0;
+        
     }
 
     public int requiredToGraduate() {
@@ -66,7 +60,8 @@ public class Student extends Person {
     public Integer getTuitionFee() {
         double onCampusFee = getCampusCourses().stream().mapToInt(Course::getCreditUnits).sum() * 300;
         double onlineFee = getOnlineCourses().stream().mapToInt(course -> course.getCreditUnits() == 3 ? 2000 : 3000).sum();
-        return  (int) (onCampusFee + onlineFee);
+        this.tuitionFee = (int) (onCampusFee + onlineFee);
+        return  tuitionFee;
     }
 
     public void dropCourse(CampusCourse cCourse) {
