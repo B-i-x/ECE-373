@@ -20,7 +20,7 @@ public class Student extends Person {
     }
 
     public int requiredToGraduate() {
-        return totalUnitsNeeded - unitsCompleted;
+        return totalUnitsNeeded - unitsCompleted - currentlyEnrolledCredits;
     }
 
 
