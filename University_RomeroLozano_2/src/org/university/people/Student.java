@@ -25,7 +25,7 @@ public class Student extends Person {
         this.tuitionFee = 0.0;
     }
 
-    public int calculateRemainingCredits() {
+    public int requiredToGraduate() {
         return totalUnitsNeeded - unitsCompleted;
     }
 
@@ -108,5 +108,13 @@ public class Student extends Person {
 
     public int getcurrentlyEnrolledCredits() {
         return currentlyEnrolledCredits;
+    }
+
+    public void setRequiredCredits(int i) {
+        this.totalUnitsNeeded = i;
+    }
+
+    public void setCompletedUnits(int i) {
+        this.unitsCompleted = i;
     }
 }

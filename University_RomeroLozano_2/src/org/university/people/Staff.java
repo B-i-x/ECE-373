@@ -9,14 +9,9 @@ public class Staff extends Employee {
     private Department department;
     private double payRate;
     private int hoursWorked;
-    private double tuitionFee;
 
     public Staff() {
-        super();
-        this.department = null;
-        this.payRate = 0.0;
-        this.hoursWorked = 0;
-        this.tuitionFee = 0.0;
+        
     }
 
     @Override
@@ -115,6 +110,13 @@ public class Staff extends Employee {
         }
     }
 
- 
+    
+    public void setPayRate(double payrate) {
+        this.payRate = payrate;
+    }
+
+    public void setMonthlyHours(int hours) {
+        this.hoursWorked = hours;
+    }
     
 }

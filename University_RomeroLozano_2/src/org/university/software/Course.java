@@ -1,5 +1,6 @@
 package org.university.software;
 
+import org.university.people.Person;
 import org.university.people.Professor;
 import org.university.people.Student;
 import org.university.hardware.Department;
@@ -11,7 +12,7 @@ public abstract class Course {
     private Department department;
     private int courseNumber;
     protected ArrayList<Integer> schedule = new ArrayList<>();
-    private ArrayList<Student> studentRoster  = new ArrayList<>();
+    private ArrayList<Person> studentRoster  = new ArrayList<>();
     private Professor professor;
     private int creditUnits;
 
@@ -57,7 +58,7 @@ public abstract class Course {
         return true;
     }
 
-    public ArrayList<Student> getStudentRoster() {
+    public ArrayList<Person> getStudentRoster() {
         return studentRoster;
     }
 

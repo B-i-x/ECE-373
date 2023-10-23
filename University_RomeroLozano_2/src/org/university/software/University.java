@@ -25,9 +25,21 @@ public class University {
         }
     }
 
+    public void printProfessorList() {
+        for (Department d : departmentList) {
+            d.printProfessorList();
+        }
+    }
+
     public void printCourseList() {
         for (Department d : departmentList) {
             d.printCourseList();
+        }
+    }
+
+    public void printStaffList() {
+        for (Department d : departmentList) {
+            d.printStaffList();
         }
     }
 

@@ -17,6 +17,10 @@ public class Professor extends Employee {
         this.department = null;
     }
 
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
     @Override
     public double earns() {
         return salary / 26;
@@ -62,4 +66,6 @@ public class Professor extends Employee {
     public Department getDepartment() {
         return department;
     }
+
+
 }

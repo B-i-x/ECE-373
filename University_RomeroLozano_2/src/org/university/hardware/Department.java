@@ -102,6 +102,12 @@ public class Department {
 		}
     }
 
+    public void printStaffList() {
+        for (Staff s: staff) {
+            System.out.println(s.getName() + " ");
+        }
+    }
+ 
     public void printCourseList() {
         for (Course c : campusCourses) {
 			System.out.println(c.getNumWDepartment() + " " + c.getName());

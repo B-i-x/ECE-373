@@ -3,6 +3,7 @@ package org.university.software;
 import org.university.hardware.Classroom;
 import org.university.people.Student;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,4 +50,5 @@ public class CampusCourse extends Course {
     public void setMaxCourseLimit(int max) {
         this.maxStudents = max;
     }
+
 }
