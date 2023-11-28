@@ -5,9 +5,10 @@ import org.university.people.Professor;
 import org.university.people.Student;
 import org.university.hardware.Department;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Course {
+public abstract class Course implements Serializable {
     private String name;
     private Department department;
     private int courseNumber;

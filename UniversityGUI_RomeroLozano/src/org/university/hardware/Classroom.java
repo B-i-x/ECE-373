@@ -1,5 +1,6 @@
 package org.university.hardware;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 import org.university.software.Course;
 
-public class Classroom {
+public class Classroom implements Serializable{
     private String room;
     
     private ArrayList<Course> courses = new ArrayList<>();

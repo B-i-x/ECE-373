@@ -10,10 +10,11 @@ import org.university.people.Student;
 import org.university.people.Professor;
 import org.university.people.Staff;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Department {
+public class Department implements Serializable{
     private String departmentName;
     private ArrayList<Course> courses = new ArrayList<>();
     private ArrayList<CampusCourse> campusCourses = new ArrayList<>();
@@ -33,11 +34,13 @@ public class Department {
 
     public void addCourse(CampusCourse cCourse) {
         campusCourses.add(cCourse);
+        courses.add(cCourse);
         cCourse.setDepartment(this);
     }
 
     public void addCourse(OnlineCourse oCourse) {
         onlineCourses.add(oCourse);
+        courses.add(oCourse);
         oCourse.setDepartment(this);
     }
 

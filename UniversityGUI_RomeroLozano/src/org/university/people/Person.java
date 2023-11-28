@@ -4,13 +4,14 @@ import org.university.software.CampusCourse;
 import org.university.software.Course;
 import org.university.software.OnlineCourse;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
     private String name;
     protected List<CampusCourse> campusCourses = new ArrayList<>() ;
     protected List<OnlineCourse> onlineCourses = new ArrayList<>() ;
