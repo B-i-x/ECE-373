@@ -72,6 +72,46 @@ public class University implements Serializable {
         }
     }
 
+    public Boolean departmentExists(String departmentName) {
+        for (Department d : departmentList) {
+            if (d.getDepartmentName().equals(departmentName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Department getDepartmentByName(String departmentName) {
+        for (Department department : departmentList) {
+            if (department.getDepartmentName().equals(departmentName)) {
+                return department;
+            }
+        }
+        return null; // Return null if no department with the given name is found
+    }
+
+    public CampusCourse getCourseByNumber(int courseNumber) {
+        for (Department department : departmentList) {
+            for (CampusCourse course : department.getCampusCourseList()) {
+                if (course.getCourseNumber() == courseNumber) {
+                    return course;
+                }
+            }
+        }
+        return null; // Return null if no course with the given number is found
+    }
+
+    public Classroom getClassroomByNumber(String roomNumber) {
+        for (Classroom classroom : classroomList) {
+            if (classroom.getRoomNumber().equals(roomNumber)) {
+                return classroom;
+            }
+        }
+        return null; // Return null if no classroom with the given room number is found
+    }
+    
+    
+
     public void printEveryoneInDepartmentSchedule() {
         for (Department d : departmentList) {
             System.out.println("\nDepartment " + d.getDepartmentName());
