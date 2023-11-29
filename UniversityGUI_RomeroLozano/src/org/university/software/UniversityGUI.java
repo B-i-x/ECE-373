@@ -15,7 +15,6 @@ import org.university.people.Student;
 public class UniversityGUI extends JFrame {
 	
 	private University univ;
-	private JFrame frame;
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
 	private JMenu studentMenu;
@@ -124,9 +123,9 @@ public class UniversityGUI extends JFrame {
 			else if(source.equals(fileExit)) {
 				System.exit(0);
 			}
-			// else if(source.equals(studentAddCourse)) {
-			// 	handleStudentAddCourse();
-			// }
+			else if(source.equals(studentAddCourse)) {
+				handleStudentAddCourse();
+			}
 			// else if(source.equals(studentDropCourse)) {
 			// 	handleStudentDropCourse();
 			// }
@@ -148,9 +147,9 @@ public class UniversityGUI extends JFrame {
 			else if(source.equals(adminAssignClass)) {
 				handleAdminAssignClassroom();
 			}
-			// else if(source.equals(adminAssignProfessor)) {
-			// 	handleAdminAssignProfessor();
-			// }
+			else if(source.equals(adminAssignProfessor)) {
+				handleAdminAssignProfessor();
+			}
 			
 			
 			
@@ -341,7 +340,7 @@ public class UniversityGUI extends JFrame {
 
             int courseNum = Integer.parseInt(courseNumber);
 
-            CampusCourse course = univ.getCourseByNumber(courseNum);
+            CampusCourse course = univ.getCampusCourseByNumber(courseNum);
             if (course == null) {
                 JOptionPane.showMessageDialog(null, 
                                                 "Course '" + courseNum + "' isn't a valid course", 
@@ -416,4 +415,168 @@ public class UniversityGUI extends JFrame {
         }
     }
     
+    public void handleAdminAssignProfessor() {
+        JTextField ProfessorField = new JTextField(10);
+        JTextField DepartmentField = new JTextField(10);
+        JTextField CourseField = new JTextField(10);
+
+        JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
+
+        myPanel.add(new JLabel("Professor:"));
+        myPanel.add(ProfessorField);
+        myPanel.add(new JLabel("Department:"));
+        myPanel.add(DepartmentField);
+        myPanel.add(new JLabel("Course #:"));
+        myPanel.add(CourseField);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "Assign Professor to Course", JOptionPane.OK_CANCEL_OPTION);
+        
+        if (result == JOptionPane.OK_OPTION) {
+            String professor = ProfessorField.getText();
+            String department = DepartmentField.getText();
+            String courseNumber = CourseField.getText();
+
+            if (!areAllFieldsFilled(new ArrayList<String>(Arrays.asList(professor, department, courseNumber)))) {;
+                return;
+            }
+
+            department = department.toUpperCase();
+
+            if (!univ.departmentExists(department)) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Department " + department + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Professor prof = univ.getProfessorByName(professor);
+
+            if (prof == null) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Professor " + professor + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!univ.courseExists(Integer.parseInt(courseNumber))) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Course " + courseNumber + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            OnlineCourse course = univ.getOnlineCourseByNumber(Integer.parseInt(courseNumber));
+            if (course != null) {
+                
+                if (course.getProfessor() != null) {
+                    JOptionPane.showMessageDialog(null, 
+                            "The professor cannot be assigned to this online course, because professor " + 
+                            course.getProfessor().getName() + " is already assigned to the online course " + 
+                            course.getName() + ".",
+                                                    "Error", 
+                                                    JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            CampusCourse course2 = univ.getCampusCourseByNumber(Integer.parseInt(courseNumber));
+            if (course2 != null) {
+                if (course2.getProfessor() != null) {
+                    JOptionPane.showMessageDialog(null, 
+                            "The professor " + prof.getName() + "cannot be assigned to this campus course, because professor " + 
+                            course2.getProfessor().getName()  + " is already assigned to the course " + 
+                            course2.getName() + ".",
+                                                    "Error", 
+                                                    JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+        }
+    }
+
+    public void handleStudentAddCourse() {
+        JTextField studentField = new JTextField(10);
+        JTextField departmentField = new JTextField(10);
+        JTextField courseField = new JTextField(10);
+
+        JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
+
+        myPanel.add(new JLabel("Student:"));
+        myPanel.add(studentField);
+        myPanel.add(new JLabel("Department:"));
+        myPanel.add(departmentField);
+        myPanel.add(new JLabel("Course #:"));
+        myPanel.add(courseField);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "Add Course", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String student = studentField.getText();
+            String department = departmentField.getText();
+            String courseNumber = courseField.getText();
+
+            if (!areAllFieldsFilled(new ArrayList<String>(Arrays.asList(student, department, courseNumber)))) {;
+                return;
+            }
+
+            department = department.toUpperCase();
+
+            if (!univ.departmentExists(department)) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Department " + department + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Student stud = univ.getStudentByName(student);
+
+            if (stud == null) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Student " + student + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            OnlineCourse course = univ.getOnlineCourseByNumber(Integer.parseInt(courseNumber));
+            if (course != null && !stud.addOnlineCourseToString(course).isEmpty()) {
+                JOptionPane.showMessageDialog(null, 
+                                                stud.addOnlineCourseToString(course), 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);                
+                return;
+            }
+
+            CampusCourse course2 = univ.getCampusCourseByNumber(Integer.parseInt(courseNumber));
+            if (course2 != null && !stud.addCampusCourseToString(course2).isEmpty()) {
+                JOptionPane.showMessageDialog(null, 
+                                                stud.addCampusCourseToString(course2), 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);                
+                return;
+            }
+
+            if (course != null) {
+                stud.addCourse(univ.getOnlineCourseByNumber(Integer.parseInt(courseNumber)));
+                JOptionPane.showMessageDialog(null, 
+                                            "Success you have added " + course.getNumWDepartment() + " to " + stud.getName(), 
+                                            "Success", 
+                                            JOptionPane.DEFAULT_OPTION);
+            } else if (course2 != null) {
+                stud.addCourse(univ.getCampusCourseByNumber(Integer.parseInt(courseNumber)));
+                JOptionPane.showMessageDialog(null, 
+                                            "Success you have added " + course2.getNumWDepartment() + " to " + stud.getName(), 
+                                            "Success", 
+                                            JOptionPane.DEFAULT_OPTION);
+            } else {
+                return;
+            }           
+        }
+    }
 }

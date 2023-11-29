@@ -1,5 +1,8 @@
 package org.university.people;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.university.hardware.Department;
 import org.university.software.CampusCourse;
 import org.university.software.OnlineCourse;
@@ -37,8 +40,27 @@ public class Student extends Person {
         getCampusCourses().add(cCourse);
         currentlyEnrolledCredits += cCourse.getCreditUnits();
         cCourse.addStudentToRoster(this);
+    }
 
+    public String addCampusCourseToString(CampusCourse cCourse) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream printStream = new PrintStream(baos);
+        PrintStream originalPrintStream = System.out;
+        System.setOut(printStream);
+
+        // Call the printAll() method, which will now print to the ByteArrayOutputStream
+        addCourse(cCourse);
+
+        // Reset System.out to the original PrintStream
+        System.setOut(originalPrintStream);
+
+        // Convert the captured output to a string
+        String printedOutput = baos.toString();
+
+        // Return the captured output as a string
+        return printedOutput;
     }
 
     @Override
@@ -54,6 +76,27 @@ public class Student extends Person {
         currentlyEnrolledCredits += oCourse.getCreditUnits();
         oCourse.addStudentToRoster(this);
 
+    }
+
+    public String addOnlineCourseToString(OnlineCourse oCourse) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream printStream = new PrintStream(baos);
+        PrintStream originalPrintStream = System.out;
+        System.setOut(printStream);
+
+        // Call the printAll() method, which will now print to the ByteArrayOutputStream
+        addCourse(oCourse);
+
+        // Reset System.out to the original PrintStream
+        System.setOut(originalPrintStream);
+
+        // Convert the captured output to a string
+        String printedOutput = baos.toString();
+
+        // Return the captured output as a string
+        return printedOutput;
     }
 
 

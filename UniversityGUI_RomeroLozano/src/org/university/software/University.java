@@ -90,16 +90,29 @@ public class University implements Serializable {
         return null; // Return null if no department with the given name is found
     }
 
-    public CampusCourse getCourseByNumber(int courseNumber) {
+    public OnlineCourse getOnlineCourseByNumber(int courseNumber) {
         for (Department department : departmentList) {
-            for (CampusCourse course : department.getCampusCourseList()) {
+            for (OnlineCourse course : department.getOnlineCourseList()) {
                 if (course.getCourseNumber() == courseNumber) {
-                    return course;
+                    return course; // Return the online course if found
                 }
             }
         }
-        return null; // Return null if no course with the given number is found
+        return null; // Return null if no online course with the given number is found
     }
+
+    public CampusCourse getCampusCourseByNumber(int courseNumber) {
+        for (Department department : departmentList) {
+            for (CampusCourse course : department.getCampusCourseList()) {
+                if (course.getCourseNumber() == courseNumber) {
+                    return course; // Return the campus course if found
+                }
+            }
+        }
+        return null; // Return null if no campus course with the given number is found
+    }
+    
+    
 
     public Classroom getClassroomByNumber(String roomNumber) {
         for (Classroom classroom : classroomList) {
@@ -109,6 +122,40 @@ public class University implements Serializable {
         }
         return null; // Return null if no classroom with the given room number is found
     }
+    
+    public Professor getProfessorByName(String name) {
+        for (Department department : departmentList) {
+            for (Professor professor : department.getProfessorList()) {
+                if (professor.getName().equalsIgnoreCase(name)) {
+                    return professor;
+                }
+            }
+        }
+        return null; // Return null if no professor with the given name is found
+    }
+
+    public boolean courseExists(int courseNumber) {
+        for (Department department : departmentList) {
+            for (CampusCourse course : department.getCampusCourseList()) {
+                if (course.getCourseNumber() == courseNumber) {
+                    return true; // Course found
+                }
+            }
+        }
+        return false; // No course with the given number found
+    }
+
+    public Student getStudentByName(String studentName) {
+        for (Department department : departmentList) {
+            for (Student student : department.getStudentList()) {
+                if (student.getName().equalsIgnoreCase(studentName)) {
+                    return student; // Return the student if found
+                }
+            }
+        }
+        return null; // Return null if no student with the given name is found
+    }
+    
     
     
 
@@ -216,5 +263,8 @@ public class University implements Serializable {
         return univ;
     }
 
+    
    
 }
+
+
