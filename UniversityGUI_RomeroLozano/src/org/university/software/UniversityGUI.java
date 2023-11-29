@@ -142,9 +142,9 @@ public class UniversityGUI extends JFrame {
 			else if(source.equals(adminNewOnlineCourse)) {
 				handleAdminNewOnlineCourse();
 			}
-			// else if(source.equals(adminNewDepartment)) {
-			// 	handleAdminNewDepartment();
-			// }
+			else if(source.equals(adminNewDepartment)) {
+				handleAdminNewDepartment();
+			}
 			else if(source.equals(adminAssignClass)) {
 				handleAdminAssignClassroom();
 			}
@@ -162,7 +162,7 @@ public class UniversityGUI extends JFrame {
         for (String field : fields) {
             if (field == null || field.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, 
-                                              "All fields must be filled out.", 
+                                              "User input cannot be empty", 
                                               "Error", 
                                               JOptionPane.ERROR_MESSAGE);
                 return false;
@@ -361,15 +361,59 @@ public class UniversityGUI extends JFrame {
 
             if (classroom.doesTimeOverlap(course)) {
                 JOptionPane.showMessageDialog(null, 
-                                                "Classroom '" + roomNumber + "' is already assigned to a course at this time", 
+                                                course.getNumWDepartment() + " conflicts with " + classroom.getCourseOverlap(course).getNumWDepartment() + ". Conflicting time slot Mon 9:30am to 10:45am. " + course.getNumWDepartment() + " course cannot be added to " + classroom.getRoomNumber() +"'s Schedule.", 
                                                 "Error", 
                                                 JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             course.setRoomAssigned(classroom);
+
+            JOptionPane.showMessageDialog(null, 
+                                            "Success you have assigned " + course.getNumWDepartment() + " to " + classroom.getRoomNumber(), 
+                                            "Success", 
+                                            JOptionPane.DEFAULT_OPTION);
         }
-
-
     }
+
+    public void handleAdminNewDepartment() {
+        JTextField departmentField = new JTextField(10);
+
+        JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
+
+        myPanel.add(new JLabel("Department:"));
+        myPanel.add(departmentField);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "New Department", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String department = departmentField.getText();
+
+            if (!areAllFieldsFilled(new ArrayList<String>(Arrays.asList(department)))) {;
+                return;
+            }
+
+            department = department.toUpperCase();
+
+            if (univ.departmentExists(department)) {
+                JOptionPane.showMessageDialog(null, 
+                                                department + " Department " + " already exists", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            } 
+
+            Department newDepartment = new Department();
+            newDepartment.setDepartmentName(department);
+
+            univ.departmentList.add(newDepartment);
+
+            JOptionPane.showMessageDialog(null, 
+                                            department + " Department was added to University", 
+                                            "Success", 
+                                            JOptionPane.DEFAULT_OPTION);
+        }
+    }
+    
 }

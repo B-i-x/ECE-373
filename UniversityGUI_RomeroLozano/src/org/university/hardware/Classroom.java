@@ -59,6 +59,42 @@ public class Classroom implements Serializable{
         return false;
     }
 
+    public int getTimeOverlap(Course new_course) {
+        int output = 0;
+        for (Course c: courses) {
+
+            for (Integer time: c.getSchedule() ) {
+
+                for (Integer new_time: new_course.getSchedule() ) {
+
+                    if (new_time == time) {
+                        output = time;
+                    }
+                }
+            }
+        }
+
+        return output;
+    }
+
+    public Course getCourseOverlap(Course new_course) {
+        Course output = null;
+        for (Course c: courses) {
+
+            for (Integer time: c.getSchedule() ) {
+
+                for (Integer new_time: new_course.getSchedule() ) {
+
+                    if (new_time == time) {
+                        output = c;
+                    }
+                }
+            }
+        }
+
+        return output;
+    }
+
     public HashMap<Course, Integer> getOverlappingCourse(Course new_course) {
         HashMap<Course, Integer> output = new HashMap<>();
         for (Course c: courses) {
