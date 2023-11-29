@@ -6,9 +6,7 @@ import org.university.people.Professor;
 import org.university.people.Staff;
 //import org.university.people.Staff;
 import org.university.people.Student;
-import org.university.software.Course;
-import org.university.software.University;
-import org.university.software.UniversityGUI;
+
 
 public class Driver2 {
 
@@ -20,8 +18,7 @@ public class Driver2 {
 	
 		
 		University univ1 = new University();
-		UniversityGUI newGUI;
-		University univ2; 
+		
 
 		
 		// Create  University of Dept, , buildings, classrooms,  professors,students, staff
@@ -279,9 +276,9 @@ public class Driver2 {
       
        // Instantiate GUI
         
-        newGUI = new UniversityGUI("UniversityGUI", univ1);	
+        UniversityGUI newGUI = new UniversityGUI("UniversityGUI", univ1);	
          
-         
+         newGUI.setVisible(true);
 	}
 
 	

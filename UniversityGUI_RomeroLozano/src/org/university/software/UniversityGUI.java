@@ -129,9 +129,9 @@ public class UniversityGUI extends JFrame {
 			else if(source.equals(studentDropCourse)) {
 				handleStudentDropCourse();
 			}
-			// else if(source.equals(studentPrintSchedule)) {
-			// 	handleStudentPrint();
-			// }
+			else if(source.equals(studentPrintSchedule)) {
+				handleStudentPrint();
+			}
 			else if(source.equals(adminPrintInfo)) {
 				handleAdminPrintInfo();
 			}
@@ -562,21 +562,28 @@ public class UniversityGUI extends JFrame {
                 return;
             }
 
+            if (course == null && course2 == null) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Course " + department + courseNumber + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             if (course != null) {
                 stud.addCourse(univ.getOnlineCourseByNumber(Integer.parseInt(courseNumber)));
-                JOptionPane.showMessageDialog(null, 
-                                            "Success you have added " + course.getNumWDepartment() + " to " + stud.getName(), 
-                                            "Success", 
-                                            JOptionPane.DEFAULT_OPTION);
-            } else if (course2 != null) {
+                
+            } 
+            
+            if (course2 != null) {
                 stud.addCourse(univ.getCampusCourseByNumber(Integer.parseInt(courseNumber)));
-                JOptionPane.showMessageDialog(null, 
-                                            "Success you have added " + course2.getNumWDepartment() + " to " + stud.getName(), 
-                                            "Success", 
-                                            JOptionPane.DEFAULT_OPTION);
-            } else {
-                return;
-            }           
+                
+            }
+
+            JOptionPane.showMessageDialog(null, 
+                                                "Success you have added " + department + courseNumber + " to " + stud.getName(), 
+                                                "Success", 
+                                                JOptionPane.DEFAULT_OPTION);
         }
     }
 
@@ -627,6 +634,16 @@ public class UniversityGUI extends JFrame {
             }
 
             OnlineCourse course = univ.getOnlineCourseByNumber(Integer.parseInt(courseNumber));
+            CampusCourse course2 = univ.getCampusCourseByNumber(Integer.parseInt(courseNumber));
+
+            if (course == null && course2 == null) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Course " + department + courseNumber + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             if (course != null && !stud.dropOnlineCourseToString(course).isEmpty()) {
                 JOptionPane.showMessageDialog(null, 
                                                 stud.dropOnlineCourseToString(course), 
@@ -635,7 +652,7 @@ public class UniversityGUI extends JFrame {
                 return;
             }
 
-            CampusCourse course2 = univ.getCampusCourseByNumber(Integer.parseInt(courseNumber));
+            
             if (course2 != null && !stud.dropCampusCourseToString(course2).isEmpty()) {
                 JOptionPane.showMessageDialog(null, 
                                                 stud.dropCampusCourseToString(course2), 
@@ -644,21 +661,69 @@ public class UniversityGUI extends JFrame {
                 return;
             }
 
+
             if (course != null) {
                 stud.dropCourse(univ.getOnlineCourseByNumber(Integer.parseInt(courseNumber)));
-                JOptionPane.showMessageDialog(null, 
-                                            "Success you have dropped " + course.getNumWDepartment() + " from " + stud.getName(), 
-                                            "Success", 
-                                            JOptionPane.DEFAULT_OPTION);
-            } else if (course2 != null) {
+            } 
+
+            if (course2 != null) {
                 stud.dropCourse(univ.getCampusCourseByNumber(Integer.parseInt(courseNumber)));
-                JOptionPane.showMessageDialog(null, 
-                                            "Success you have dropped " + course2.getNumWDepartment() + " from " + stud.getName(), 
+            }
+            JOptionPane.showMessageDialog(null, 
+                                            "Success you have dropped " + department + courseNumber + " from " + stud.getName(), 
                                             "Success", 
                                             JOptionPane.DEFAULT_OPTION);
-            } else {
+                return;
+
+            
+        }
+    }
+
+    public void handleStudentPrint() {
+        JTextField studentField = new JTextField(10);
+
+        JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
+
+        myPanel.add(new JLabel("Student:"));
+        myPanel.add(studentField);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "Print Schedule", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String student = studentField.getText();
+
+            if (!areAllFieldsFilled(new ArrayList<String>(Arrays.asList(student)))) {;
                 return;
             }
+
+            Student stud = univ.getStudentByName(student);
+
+            if (stud == null) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Student " + student + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            else {
+                JTextArea textArea = new JTextArea(25, 50); // Set your desired size
+                textArea.setText(stud.printScheduleToString()); // Assuming getAllInfo() returns a String
+                textArea.setEditable(false); // Make the text area non-editable
+                
+                JScrollPane scrollPane = new JScrollPane(textArea);
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+                scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+                JFrame infoFrame = new JFrame("Student " + stud.getName() + "'s Schedule");
+                infoFrame.add(scrollPane); // Add the JScrollPane to the frame
+                infoFrame.pack(); // Adjusts the frame to the size of its contents
+                infoFrame.setLocationRelativeTo(null); // Center the frame
+                infoFrame.setVisible(true); // Make the frame visible
+            }
+            
+
+        
         }
     }
 }

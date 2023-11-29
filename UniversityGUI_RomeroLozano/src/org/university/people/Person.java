@@ -4,6 +4,8 @@ import org.university.software.CampusCourse;
 import org.university.software.Course;
 import org.university.software.OnlineCourse;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,6 +65,27 @@ public abstract class Person implements Serializable {
         for (OnlineCourse course : onlineCourses) {
             System.out.println(course.getNumWDepartment() + " " + course.getName());
         }
+    }
+
+    public String printScheduleToString() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream printStream = new PrintStream(baos);
+        PrintStream originalPrintStream = System.out;
+        System.setOut(printStream);
+
+        // Call the printAll() method, which will now print to the ByteArrayOutputStream
+        printSchedule();
+
+        // Reset System.out to the original PrintStream
+        System.setOut(originalPrintStream);
+
+        // Convert the captured output to a string
+        String printedOutput = baos.toString();
+
+        // Return the captured output as a string
+        return printedOutput;
     }
 
     public abstract void addCourse(CampusCourse cCourse);
