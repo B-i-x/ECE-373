@@ -126,6 +126,27 @@ public class Student extends Person {
         cCourse.removeStudent(this);
     }
 
+    public String dropCampusCourseToString(CampusCourse cCourse) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream printStream = new PrintStream(baos);
+        PrintStream originalPrintStream = System.out;
+        System.setOut(printStream);
+
+        // Call the printAll() method, which will now print to the ByteArrayOutputStream
+        dropCourse(cCourse);
+
+        // Reset System.out to the original PrintStream
+        System.setOut(originalPrintStream);
+
+        // Convert the captured output to a string
+        String printedOutput = baos.toString();
+
+        // Return the captured output as a string
+        return printedOutput;
+    }
+
     public void dropCourse(OnlineCourse oCourse) {
         if (!getOnlineCourses().contains(oCourse)) {
             System.out.println("The course " + oCourse.getNumWDepartment() + " could not be dropped because " + getName() + " is not enrolled in " + oCourse.getNumWDepartment() + ".");
@@ -134,6 +155,27 @@ public class Student extends Person {
         getOnlineCourses().remove(oCourse);
         currentlyEnrolledCredits -= oCourse.getCreditUnits();
         oCourse.removeStudent(this);
+    }
+
+    public String dropOnlineCourseToString(OnlineCourse oCourse) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        // Redirect System.out to the ByteArrayOutputStream
+        PrintStream printStream = new PrintStream(baos);
+        PrintStream originalPrintStream = System.out;
+        System.setOut(printStream);
+
+        // Call the printAll() method, which will now print to the ByteArrayOutputStream
+        dropCourse(oCourse);
+
+        // Reset System.out to the original PrintStream
+        System.setOut(originalPrintStream);
+
+        // Convert the captured output to a string
+        String printedOutput = baos.toString();
+
+        // Return the captured output as a string
+        return printedOutput;
     }
 
     //getters and setters

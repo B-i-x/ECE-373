@@ -126,9 +126,9 @@ public class UniversityGUI extends JFrame {
 			else if(source.equals(studentAddCourse)) {
 				handleStudentAddCourse();
 			}
-			// else if(source.equals(studentDropCourse)) {
-			// 	handleStudentDropCourse();
-			// }
+			else if(source.equals(studentDropCourse)) {
+				handleStudentDropCourse();
+			}
 			// else if(source.equals(studentPrintSchedule)) {
 			// 	handleStudentPrint();
 			// }
@@ -577,6 +577,88 @@ public class UniversityGUI extends JFrame {
             } else {
                 return;
             }           
+        }
+    }
+
+    public void handleStudentDropCourse() {
+        JTextField studentField = new JTextField(10);
+        JTextField departmentField = new JTextField(10);
+        JTextField courseField = new JTextField(10);
+
+        JPanel myPanel = new JPanel();
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.PAGE_AXIS));
+
+        myPanel.add(new JLabel("Student:"));
+        myPanel.add(studentField);
+        myPanel.add(new JLabel("Department:"));
+        myPanel.add(departmentField);
+        myPanel.add(new JLabel("Course #:"));
+        myPanel.add(courseField);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel, "Add Course", JOptionPane.OK_CANCEL_OPTION);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String student = studentField.getText();
+            String department = departmentField.getText();
+            String courseNumber = courseField.getText();
+
+            if (!areAllFieldsFilled(new ArrayList<String>(Arrays.asList(student, department, courseNumber)))) {;
+                return;
+            }
+
+            department = department.toUpperCase();
+
+            if (!univ.departmentExists(department)) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Department " + department + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Student stud = univ.getStudentByName(student);
+
+            if (stud == null) {
+                JOptionPane.showMessageDialog(null, 
+                                                "Student " + student + " doesn't exist", 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            OnlineCourse course = univ.getOnlineCourseByNumber(Integer.parseInt(courseNumber));
+            if (course != null && !stud.dropOnlineCourseToString(course).isEmpty()) {
+                JOptionPane.showMessageDialog(null, 
+                                                stud.dropOnlineCourseToString(course), 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);                
+                return;
+            }
+
+            CampusCourse course2 = univ.getCampusCourseByNumber(Integer.parseInt(courseNumber));
+            if (course2 != null && !stud.dropCampusCourseToString(course2).isEmpty()) {
+                JOptionPane.showMessageDialog(null, 
+                                                stud.dropCampusCourseToString(course2), 
+                                                "Error", 
+                                                JOptionPane.ERROR_MESSAGE);                
+                return;
+            }
+
+            if (course != null) {
+                stud.dropCourse(univ.getOnlineCourseByNumber(Integer.parseInt(courseNumber)));
+                JOptionPane.showMessageDialog(null, 
+                                            "Success you have dropped " + course.getNumWDepartment() + " from " + stud.getName(), 
+                                            "Success", 
+                                            JOptionPane.DEFAULT_OPTION);
+            } else if (course2 != null) {
+                stud.dropCourse(univ.getCampusCourseByNumber(Integer.parseInt(courseNumber)));
+                JOptionPane.showMessageDialog(null, 
+                                            "Success you have dropped " + course2.getNumWDepartment() + " from " + stud.getName(), 
+                                            "Success", 
+                                            JOptionPane.DEFAULT_OPTION);
+            } else {
+                return;
+            }
         }
     }
 }
