@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-public class BookTest {
+class BookTest {
 
     @Test
-    public void testDefaultConstructor() {
+    final void testDefaultConstructor() {
         Book book = new Book();
         assertEquals("empty", book.getTitle());
         assertEquals("empty", book.getAuthor());
@@ -18,35 +18,35 @@ public class BookTest {
     }
 
     @Test
-    public void testGetTitle() {
+    final void testGetTitle() {
         Book book = new Book();
         book.setTitle("Alex's Random Title");
         assertEquals("Alex's Random Title", book.getTitle());
     }
 
     @Test
-    public void testSetTile() {
+    final void testSetTile() {
         Book book = new Book();
         book.setTitle("Another Alex's Random Title");
         assertEquals("Another Alex's Random Title", book.getTitle());
     }
 
     @Test
-    public void testGetAuthor() {
+    final void testGetAuthor() {
         Book book = new Book();
         book.setAuthor("Alex's Random Author");
         assertEquals("Alex's Random Author", book.getAuthor());
     }
 
     @Test
-    public void testSetAuthor() {
+    final void testSetAuthor() {
         Book book = new Book();
         book.setAuthor("Another Alex's Random Author");
         assertEquals("Another Alex's Random Author", book.getAuthor());
     }
 
     @Test
-    public void testGetPerson() {
+    final void testGetPerson() {
         Book book = new Book();
         Person person = new Person(); 
         person.setName("Alex Romero");  
@@ -55,7 +55,7 @@ public class BookTest {
     }
 
     @Test
-    public void testSetPerson() {
+    final void testSetPerson() {
         Book book = new Book();
         Person person = new Person();
         person.setName("Alex Lozano"); 
