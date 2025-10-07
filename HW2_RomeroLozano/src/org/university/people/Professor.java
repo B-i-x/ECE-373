@@ -106,3 +106,27 @@ public class Professor {
     }
 
 }
+
+// public void printScheduleBasic(List<Course> courses) {
+//     Map<Integer, Course> tempTimes = new HashMap<>();
+
+//     // 1) Flatten all course times into the map
+//     for (Course c : /* ______ */) { // TODO: pick the collection to iterate
+//         for (Integer t : /* ______ */) { // TODO: get times from the course
+//             tempTimes.put(/* key */ ______, /* value */ ______); // TODO
+//         }
+//     }
+
+//     // 2) Copy keys to a list and sort
+//     List<Integer> sortedKeys = new ArrayList<>(/* ______ */); // TODO: which keys?
+//     /* ______ */.sort(sortedKeys); // TODO: which utility sorts?
+
+//     // 3) Print
+//     for (Integer x : /* ______ */) { // TODO: which list to iterate?
+//         System.out.println(
+//             Course.printIndividualSchedule(/* ______ */) +  // TODO: time key
+//             tempTimes.get(/* ______ */).getNumWDepartment() + " " + // TODO
+//             tempTimes.get(/* ______ */).getName() // TODO
+//         );
+//     }
+// }
