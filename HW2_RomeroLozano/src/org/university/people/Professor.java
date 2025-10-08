@@ -58,20 +58,10 @@ public class Professor {
     }
 
     public void addCourse(Course aCourse) {
-        // System.out.println("for professor " + this.getName() + " is conflict detected? " + detectConflict(aCourse));
-        if (detectConflict(aCourse)) {
-            // System.out.println("Schedule conflict detected. Cannot add course '" + aCourse.getName() + "'.");
-        } 
-        else {
+        if (!detectConflict(aCourse)) {
             courses.add(aCourse);
             aCourse.setProfessor(this);
-            // System.out.println("Course '" + aCourse.getName() + "' added to the schedule of " + name + ".");
         }
-
-        // printSchedule();
-
-        return;
-
     }
 
     public String getName() {
